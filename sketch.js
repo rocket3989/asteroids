@@ -48,7 +48,7 @@ function draw() {
 	}
 	if (state == "game_over"){
 		textSize(100);
-		text("GAME OVER",100,200);
+		text("GAME OVER DUDE",100,200);
 		if (keyIsPressed)
 			key_pressed = true;
 		if(!keyIsPressed && key_pressed){
