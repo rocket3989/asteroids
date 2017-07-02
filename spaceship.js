@@ -6,7 +6,6 @@ function spaceship(){
 	this.angle_acc = .1;
 	
 	this.space_press = false;
-	//this.last_bullet = frameCount;
 	this.pos = createVector(width/2,height/2);
 	this.vel = createVector(0,0);
 	this.angle = -PI/2;
@@ -49,7 +48,7 @@ function spaceship(){
 					this.last_bullet = frameCount;
 			 	}
 				*/
-			//}
+			
 			for(index = 0; index < asteroids.length; index++){
 				if (asteroids[index].distance(this.pos)< 40){
 					this.kill();

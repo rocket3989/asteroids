@@ -1,7 +1,7 @@
 function bullet(velocity,position,angle){
 	//constants
-	this.max_life = 100;
-	this.bullet_velocity = 10;
+	this.max_life = 50;
+	this.bullet_velocity = 20;
 	
 	this.life = 0;
 	this.pos = position;
@@ -19,7 +19,9 @@ function bullet(velocity,position,angle){
 			this.kill();
 			
 		}
+		strokeWeight(4);
 		point(this.pos.x,this.pos.y);
+		strokeWeight(1);
 		
 	}
 	this.kill = function(){
