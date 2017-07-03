@@ -1,6 +1,7 @@
 var ship;
 var bullets = [];
 var asteroids = [];
+var dead_asteroids = [];
 var state = "start";
 var key_pressed = false;
 function preload(){
@@ -27,6 +28,7 @@ function draw() {
 
 	
 	if (state == "start"){
+		ship = new spaceship();
 		textSize(100);
 		text("ASTEROIDS",width/2,height/3); 
 		textSize(25);
@@ -34,7 +36,6 @@ function draw() {
 		
 		if (keyIsPressed){
 			state = "playing";
-			ship = new spaceship();
 			key_pressed = false;
 		}
 	}
@@ -59,8 +60,10 @@ function draw() {
 	}
 
 	if(asteroids.length == 0){
-		for(i = 0; i < 10; i++){
-			asteroids.push(new asteroid(createVector(random(width/3)+(width/3)*random([0,2]),random(height/3)+(height/3)*random([0,2]))));
+		while(asteroids.length<=10){
+			var aster = new asteroid(createVector(random(width),random(height)),3);
+			if (aster.distance(ship.pos)>400)
+				asteroids.push(aster);
 		}
 	} 
 	for (i = asteroids.length-1 ; i >= 0 ; i--){

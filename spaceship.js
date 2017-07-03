@@ -48,12 +48,6 @@ function spaceship(){
 					this.last_bullet = frameCount;
 			 	}
 				*/
-			
-			for(index = 0; index < asteroids.length; index++){
-				if (asteroids[index].distance(this.pos)< 40){
-					this.kill();
-			}
-		}
 		this.vel.limit(this.max_vel);
 		this.pos.add(this.vel);
 		this.pos.set((width+this.pos.x)%width,(height+this.pos.y)%height);
@@ -61,8 +55,12 @@ function spaceship(){
 		
 		
 	}
+	this.getPos = function(){
+		return this.pos;
+	}
 	this.kill = function(){
 		state = "game_over";
+		this.pos = createVector(width/2,height/2);
 	}
 
 }
