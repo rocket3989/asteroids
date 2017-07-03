@@ -15,6 +15,7 @@ function setup() {
 	textAlign(CENTER,CENTER);
 	stroke(255);
 	noFill();
+	noCursor();
 	
 }
 function windowResized(){

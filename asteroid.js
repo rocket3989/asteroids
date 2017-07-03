@@ -2,7 +2,7 @@ var alive = true
 var dead = false
 function asteroid(position,size){
 	//constants
-	this.max_speed = 5;
+	this.max_speed = 4*(4-size);
 	this.max_death = 30;
 	
 	this.death_time = 0;
@@ -59,7 +59,7 @@ function asteroid(position,size){
 	}
 	this.kill = function(){
 		for(index = 0;index<12;index++){
-			this.rocks[index] = random(1,3);
+			this.rocks[index] = random(0.5,3);
 		}
 		this.state = dead;
 		if (size>1){
