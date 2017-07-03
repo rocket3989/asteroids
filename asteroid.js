@@ -44,6 +44,7 @@ function asteroid(position,size){
 		}
 		else{ //if the asteroid has been destroyed
 			push();
+				this.pos.add(this.vel);
 				strokeWeight(2);
 				translate(this.pos.x,this.pos.y);
 				rotate(this.angle);
