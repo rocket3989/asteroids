@@ -1,28 +1,29 @@
 var alive = true
 var dead = false
-function asteroid(position,size){
+function asteroid(position,size,velocity){
 	//constants
-	this.max_speed = 4*(4-size);
+	this.max_speed = 2*(4-size);
 	this.max_death = 30;
 	
 	this.death_time = 0;
 	this.state = alive;
 	this.size = size
-	this.vel = p5.Vector.random2D().setMag(random(this.max_speed));
+	if(velocity)
+		this.vel = velocity.limit(this.max_speed);
+	else
+		this.vel = p5.Vector.random2D().setMag(random(this.max_speed));
+	
 	this.pos = position;
 	this.points = [];
 	this.rocks = [];
 	for (index = 0; index < 12; index++){
 		this.points[index]=random(7*this.size,17*this.size);
 	}
-	
-	
-	
 	this.show = function(){
 		if (this.state){ //if the asteroid has not been destroyed
 			this.pos.add(this.vel);
 			this.pos.set((width+this.pos.x)%width,(height+this.pos.y)%height);
-			if (this.distance(ship.getPos())<13*this.size)
+			if (this.distance(ship.getPos())<13*this.size) 
 				ship.kill();
 			for(index = 0; index < bullets.length; index++){
 				if (bullets[index].distance(this.pos)< 40){
@@ -60,12 +61,13 @@ function asteroid(position,size){
 	}
 	this.kill = function(){
 		for(index = 0;index<12;index++){
-			this.rocks[index] = random(0.5,3);
+			this.rocks[index] = random(0,3);
 		}
 		this.state = dead;
 		if (size>1){
-			asteroids.push(new asteroid(this.pos.copy(),size - 1));
-			asteroids.push(new asteroid(this.pos.copy(),size - 1));
+			var offset = p5.Vector.random2D().setMag(2);
+			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).add(offset)));
+			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).sub(offset)));
 		}
 	}
 	this.distance = function(target_pos){
