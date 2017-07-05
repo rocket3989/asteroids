@@ -1,5 +1,3 @@
 # asteroids
 p5 asteroids clone
-//testing git commit
-test 2
-test 3
+//testing git commit with linux source
