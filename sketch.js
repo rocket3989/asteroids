@@ -4,6 +4,7 @@ var asteroids = [];
 var dead_asteroids = [];
 var state = "start";
 var key_pressed = false;
+var score = 0;
 function preload(){
 	fontVector = loadFont("./libraries/Vectorb.ttf");
 	
@@ -29,6 +30,7 @@ function draw() {
 
 	
 	if (state == "start"){
+		score = 0;
 		ship = new spaceship();
 		textSize(100);
 		text("ASTEROIDS",width/2,height/3); 
@@ -70,8 +72,9 @@ function draw() {
 	for (i = asteroids.length-1 ; i >= 0 ; i--){
 		asteroids[i].show();
 	}
+	push();
+		textAlign(LEFT,TOP);
+		textSize(30);
+		text(score,20,20);
+	pop();
 }
-
-
-
-

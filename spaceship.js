@@ -59,7 +59,7 @@ function spaceship(){
 		return this.pos;
 	}
 	this.kill = function(){
-		//state = "game_over";
+		state = "game_over";
 		this.pos = createVector(width/2,height/2);
 	}
 

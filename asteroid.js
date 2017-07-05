@@ -23,7 +23,7 @@ function asteroid(position,size,velocity){
 		if (this.state){ //if the asteroid has not been destroyed
 			this.pos.add(this.vel);
 			this.pos.set((width+this.pos.x)%width,(height+this.pos.y)%height);
-			if (this.distance(ship.getPos())<13*this.size) 
+			if (this.distance(ship.getPos())<15*this.size) 
 				ship.kill();
 			for(index = 0; index < bullets.length; index++){
 				if (bullets[index].distance(this.pos)< 40){
@@ -69,6 +69,20 @@ function asteroid(position,size,velocity){
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).add(offset)));
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).sub(offset)));
 		}
+		switch(size){
+			case 3:
+				score += 20;
+				break;
+			case 2:
+				score += 50;
+				break;
+			case 1:
+				score += 100;
+				break;
+		}
+		
+		
+		
 	}
 	this.distance = function(target_pos){
 		return this.pos.dist(target_pos);
