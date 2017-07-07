@@ -1,5 +1,3 @@
-var alive = true
-var dead = false
 function asteroid(position,size,velocity){
 	//constants
 	this.max_speed = 2*(4-size);
@@ -49,9 +47,8 @@ function asteroid(position,size,velocity){
 				strokeWeight(2);
 				translate(this.pos.x,this.pos.y);
 				rotate(this.angle);
-				var a = 0;
 				for (index = 0; index < this.rocks.length; index++){
-					a += PI/6;
+					var a = index*PI/6;
 					point(this.rocks[index] * cos(a)*this.death_time,this.rocks[index] * sin(a)*this.death_time);
 				}
 			pop();
@@ -69,6 +66,7 @@ function asteroid(position,size,velocity){
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).add(offset)));
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).sub(offset)));
 		}
+		var mod = floor(score / 10000);
 		switch(size){
 			case 3:
 				score += 20;
@@ -80,9 +78,8 @@ function asteroid(position,size,velocity){
 				score += 100;
 				break;
 		}
-		
-		
-		
+		if (floor(score / 10000) != mod)
+			lives++;
 	}
 	this.distance = function(target_pos){
 		return this.pos.dist(target_pos);

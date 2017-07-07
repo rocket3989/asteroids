@@ -5,26 +5,68 @@ function spaceship(){
 	this.max_acc = .1;
 	this.angle_acc = .1;
 	
+	this.key_press = true;
+	this.rocks = [];
+	this.offset = [1,1,1,1,1,1,1,1,1];
+	this.death_time = 1000;
+	this.state = dead;
+	this.prevmillis = 0;
 	this.space_press = false;
 	this.pos = createVector(width/2,height/2);
 	this.vel = createVector(0,0);
 	this.angle = -PI/2;
 	
 	this.show = function(){
-		push();
-			
-			translate(this.pos.x,this.pos.y);
-			rotate(this.angle);
-			beginShape();
-				vertex(15,0);
-				vertex(-14,8);
-				vertex(-8,6);
-				vertex(-8,-6);
-				vertex(-14,-8);
-			endShape(CLOSE);
-		pop();
+		if(this.state){
+			push();
+				translate(this.pos.x,this.pos.y);
+				rotate(this.angle);
+				line(15,0,-14,8);
+				line(-8,6,-8,-6);
+				line(-14,-8,15,0);
+			pop();
+		}
+		else{
+			push();
+				translate(this.pos.x,this.pos.y);
+				rotate(this.angle);
+				push();
+					translate(this.offset[0]*this.death_time,this.offset[1]*this.death_time);
+					rotate(this.offset[2]/10*this.death_time);
+					line(15,0,-14,8);
+				pop();
+				push();
+					translate(this.offset[3]*this.death_time,this.offset[4]*this.death_time);
+					rotate(this.offset[5]/10*this.death_time);
+					line(-8,6,-8,-6);
+				pop();
+				push();
+					translate(this.offset[6]*this.death_time,this.offset[7]*this.death_time);
+					rotate(this.offset[8]/10*this.death_time);
+					line(-14,-8,15,0);
+				pop();
+				strokeWeight(2);
+				for (index = 0; index < this.rocks.length; index++){
+					var a = index*PI/3;
+					point(this.rocks[index] * cos(a)*this.death_time,this.rocks[index] * sin(a)*this.death_time);
+				}
+			pop();
+			this.death_time ++;
+			if (!keyIsPressed)
+				this.key_press = false;
+			if ((!this.key_press&&keyIsPressed)||this.death_time>100){
+				this.prevmillis = millis();
+				if (state == "playing"){
+					this.state = alive;
+					this.pos = createVector(width/2,height/2);
+					this.vel = createVector(0,0);
+				}
+				this.key_press = true;
+			}
+		}
 	}
 	this.update = function(){
+		if(this.state){
 			if (keyIsDown(UP_ARROW))
 					this.vel.add(p5.Vector.fromAngle(this.angle).setMag(this.max_acc));
 
@@ -39,6 +81,7 @@ function spaceship(){
 			if (!keyIsDown(32)&&this.space_press){
 				this.space_press = false;
 			}
+		}
 				
 				
 				
@@ -50,7 +93,8 @@ function spaceship(){
 				*/
 		this.vel.limit(this.max_vel);
 		this.pos.add(this.vel);
-		this.pos.set((width+this.pos.x)%width,(height+this.pos.y)%height);
+		if(this.state)
+			this.pos.set((width+this.pos.x)%width,(height+this.pos.y)%height);
 		
 		
 		
@@ -59,8 +103,18 @@ function spaceship(){
 		return this.pos;
 	}
 	this.kill = function(){
-		state = "game_over";
-		this.pos = createVector(width/2,height/2);
+		if (this.state){
+			if (millis() > this.prevmillis + 1000){
+				this.state = dead;
+				this.death_time = 0;
+				if (lives--<1)
+					state = "game_over";
+				for(index = 0;index<9;index++){
+					this.rocks[index] = random(0,3);
+					this.offset[index] = random(-1.5,1.5);
+				}
+			}
+			this.prevmillis = millis();
+		}
 	}
-
 }
