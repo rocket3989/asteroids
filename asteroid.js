@@ -63,9 +63,10 @@ function asteroid(position,size,velocity){
 		}
 		this.state = dead;
 		if (size>1){
-			var offset = invel.rotate(3*PI/4).setMag(2);//p5.Vector.random2D().setMag(2);
+			var offset = invel.rotate(PI/4).setMag(2);//p5.Vector.random2D().setMag(2);
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).add(offset)));
-			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).sub(offset)));
+			offset.rotate(-PI/2);
+			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).add(offset)));
 		}
 		var mod = floor(score / 10000);
 		switch(size){
