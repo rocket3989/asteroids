@@ -71,7 +71,7 @@ function draw() {
 	ship.show();
 	
 	if(asteroids.length == 0){
-		while(asteroids.length<=10){
+		while(asteroids.length<=9){
 			var aster = new asteroid(createVector(random(width),random(height)),3);
 			if (aster.distance(ship.pos)>400)
 				asteroids.push(aster);

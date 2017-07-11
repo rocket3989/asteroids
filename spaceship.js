@@ -14,7 +14,7 @@ function spaceship(){
 	this.space_press = false;
 	this.pos = createVector(width/2,height/2);
 	this.vel = createVector(0,0);
-	this.angle = -PI/2;
+	this.angle = 0;
 	
 	this.show = function(){
 		if(this.state){
@@ -75,7 +75,7 @@ function spaceship(){
 			if (keyIsDown(LEFT_ARROW))
 					this.angle -= this.angle_acc;
 			if (keyIsDown(32)&&!this.space_press){
-				bullets.push(new bullet(this.vel.copy(),this.pos.copy(),this.angle));
+				bullets.push(new bullet(this.vel.copy(),this.pos.copy().add(this.vel),this.angle));
 				this.space_press = true;
 			}
 			if (!keyIsDown(32)&&this.space_press){

@@ -25,8 +25,9 @@ function asteroid(position,size,velocity){
 				ship.kill();
 			for(index = 0; index < bullets.length; index++){
 				if (bullets[index].distance(this.pos)< 40){
+					var velbul = bullets[index].vel.copy();
 					bullets[index].kill();
-					this.kill();
+					this.kill(velbul);
 				}
 			}
 			push();
@@ -56,13 +57,13 @@ function asteroid(position,size,velocity){
 				asteroids.splice(asteroids.indexOf(this),1);
 		}
 	}
-	this.kill = function(){
+	this.kill = function(invel){
 		for(index = 0;index<12;index++){
 			this.rocks[index] = random(0,3);
 		}
 		this.state = dead;
 		if (size>1){
-			var offset = p5.Vector.random2D().setMag(2);
+			var offset = invel.rotate(3*PI/4).setMag(2);//p5.Vector.random2D().setMag(2);
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).add(offset)));
 			asteroids.push(new asteroid(this.pos.copy(),size - 1,this.vel.copy().mult(2).sub(offset)));
 		}
