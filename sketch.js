@@ -14,7 +14,7 @@ function preload(){
 	sound_bangL = loadSound("./sounds/bangLarge.wav");
 	sound_bangM = loadSound("./sounds/bangMedium.wav");
 	sound_bangS = loadSound("./sounds/bangSmall.wav");
-	// sound_ = loadSound("./sounds/.wav");
+	sound_thrust = loadSound("./sounds/thrust.wav");
 	// sound_ = loadSound("./sounds/.wav");
 	// sound_ = loadSound("./sounds/.wav");
 	// sound_ = loadSound("./sounds/.wav");

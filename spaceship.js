@@ -15,6 +15,7 @@ function spaceship(){
 	this.pos = createVector(width/2,height/2);
 	this.vel = createVector(0,0);
 	this.angle = 0;
+	this.engines = false;
 	
 	this.show = function(){
 		if(this.state){
@@ -24,6 +25,9 @@ function spaceship(){
 				line(15,0,-14,8);
 				line(-8,6,-8,-6);
 				line(-14,-8,15,0);
+				if (this.engines&&Math.random()<.5){
+					sound_thrust.play();
+				}
 			pop();
 		}
 		else{
@@ -66,9 +70,12 @@ function spaceship(){
 		}
 	}
 	this.update = function(){
+		this.engines = false;
 		if(this.state){
-			if (keyIsDown(UP_ARROW))
+			if (keyIsDown(UP_ARROW)){
 					this.vel.add(p5.Vector.fromAngle(this.angle).setMag(this.max_acc));
+					this.engines = true;
+					}
 
 			if (keyIsDown(RIGHT_ARROW))
 					this.angle += this.angle_acc;
