@@ -72,12 +72,15 @@ function asteroid(position,size,velocity){
 		switch(size){
 			case 3:
 				score += 20;
+				sound_bangL.play()
 				break;
 			case 2:
 				score += 50;
+				sound_bangM.play();
 				break;
 			case 1:
 				score += 100;
+				sound_bangS.play();
 				break;
 		}
 		if (floor(score / 10000) != mod)

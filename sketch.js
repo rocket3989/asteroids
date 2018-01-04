@@ -10,7 +10,15 @@ var dead = false;
 
 function preload(){
 	fontVector = loadFont("./libraries/Vectorb.ttf");
-	
+	sound_fire = loadSound("./sounds/fire.wav");
+	sound_bangL = loadSound("./sounds/bangLarge.wav");
+	sound_bangM = loadSound("./sounds/bangMedium.wav");
+	sound_bangS = loadSound("./sounds/bangSmall.wav");
+	// sound_ = loadSound("./sounds/.wav");
+	// sound_ = loadSound("./sounds/.wav");
+	// sound_ = loadSound("./sounds/.wav");
+	// sound_ = loadSound("./sounds/.wav");
+	// sound_ = loadSound("./sounds/.wav");
 }
 
 function setup() {

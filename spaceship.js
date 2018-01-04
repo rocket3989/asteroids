@@ -77,6 +77,7 @@ function spaceship(){
 			if (keyIsDown(32)&&!this.space_press){
 				bullets.push(new bullet(this.vel.copy(),this.pos.copy().add(this.vel),this.angle));
 				this.space_press = true;
+				sound_fire.play();
 			}
 			if (!keyIsDown(32)&&this.space_press){
 				this.space_press = false;
