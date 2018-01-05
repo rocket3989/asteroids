@@ -15,6 +15,7 @@ function preload(){
 	sound_bangM = loadSound("./sounds/bangMedium.wav");
 	sound_bangS = loadSound("./sounds/bangSmall.wav");
 	sound_thrust = loadSound("./sounds/thrust.wav");
+	sound_thrust.setVolume(.25);
 	// sound_ = loadSound("./sounds/.wav");
 	// sound_ = loadSound("./sounds/.wav");
 	// sound_ = loadSound("./sounds/.wav");
@@ -28,6 +29,7 @@ function setup() {
 	textAlign(CENTER,CENTER);
 	stroke(255);
 	noFill();
+	frameRate(100);
 	//noCursor();
 	
 }
@@ -107,5 +109,6 @@ function draw() {
 		textAlign(LEFT,TOP);
 		textSize(20);
 		text(score,1,1);
+		text(parseInt(frameRate()),1,100);
 	pop();
 }

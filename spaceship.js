@@ -114,6 +114,7 @@ function spaceship(){
 		if (this.state){
 			if (millis() > this.prevmillis + 1000){
 				this.state = dead;
+				sound_bangM.play();
 				this.death_time = 0;
 				if (lives--<1)
 					state = "game_over";
