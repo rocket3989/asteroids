@@ -25,7 +25,10 @@ function spaceship(){
 				line(15,0,-14,8);
 				line(-8,6,-8,-6);
 				line(-14,-8,15,0);
-				if (this.engines&&Math.random()<.5){
+				if (this.engines&&Math.random()<.3){
+					line(-10,4,-13,0);
+					line(-13,0,-10,-4);
+					line(-10,-4,-10,4);
 					sound_thrust.play();
 				}
 			pop();
