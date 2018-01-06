@@ -7,6 +7,9 @@ var score = 0;
 var lives = 5;
 var alive = true;
 var dead = false;
+var last_beep = 0;
+var playing = 0;
+var interval = 50;
 
 function preload(){
 	fontVector = loadFont("./libraries/Vectorb.ttf");
@@ -16,8 +19,8 @@ function preload(){
 	sound_bangS = loadSound("./sounds/bangSmall.wav");
 	sound_thrust = loadSound("./sounds/thrust.wav");
 	sound_thrust.setVolume(.25);
-	// sound_ = loadSound("./sounds/.wav");
-	// sound_ = loadSound("./sounds/.wav");
+	sound_high = loadSound("./sounds/beat1.wav");
+	sound_low = loadSound("./sounds/beat2.wav");
 	// sound_ = loadSound("./sounds/.wav");
 	// sound_ = loadSound("./sounds/.wav");
 }
@@ -61,6 +64,17 @@ function draw() {
 	if (state == "playing"){
 		for (i = bullets.length-1 ; i >= 0 ; i--){
 			bullets[i].show();
+		}
+		if (frameCount - last_beep>interval){
+			if (playing)
+				sound_high.play();
+			else
+				sound_low.play();
+			interval--;
+			if (interval < 10)
+				interval = 60;
+			playing = !playing;
+			this.last_beep = frameCount;
 		}
 	}
 	if (state == "game_over"){
